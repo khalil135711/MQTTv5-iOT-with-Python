@@ -1,0 +1,17 @@
+# Get the current IP address
+$current_ip = (Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -eq "Ethernet" }).IPAddress
+
+# Path to the mosquitto.conf file
+$config_file = "C:\Program Files\mosquitto\mosquitto.conf"
+
+# Read the content of the mosquitto.conf file
+$config_content = Get-Content $config_file
+
+# Update the bridge_bind_address line with the current IP address
+$config_content = $config_content -replace "bridge_bind_address .*", "bridge_bind_address $current_ip"
+
+# Write the updated content back to the mosquitto.conf file
+$config_content | Set-Content $config_file
+
+# Restart the Mosquitto service
+Restart-Service 
