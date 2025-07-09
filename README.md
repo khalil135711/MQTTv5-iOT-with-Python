@@ -94,14 +94,19 @@ $ mosquitto_sub -h <REMOTE_BROKER_IP> -t bridge/test -u <REMOTE_BROKER_USERNAME>
 # Firewall Configuration
 
 Open the necessary ports for MQTT:
+
 $ sudo ufw allow 1883
+
 $ sudo ufw allow 8883
+
 # Logs and Debugging
 
 Enable verbose logging in Mosquitto by adding the following to /etc/mosquitto/mosquitto.conf:
 
 $ log_type all
+
 $ connection_messages true
+
 $ log_dest file /var/log/mosquitto/mosquitto.log
 
 Check logs for troubleshooting:
